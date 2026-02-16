@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  # This is the "Target" app that StackHawk will attack
+  vulnerable-app:
+    image: bkimminich/juice-shop
+    ports:
+      - "3000:3000"
+    networks:
+      - lab-network
+
+networks:
+  lab-network:
+    driver: bridge

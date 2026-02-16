@@ -1,14 +1,11 @@
 # stackhawk.yml
 app:
-  applicationId: af84a5d9-0d41-4fa8-be44-79c41ae70ff8  # Replace with the App ID from your dashboard
-  host: http://vulnerable-app:3000 # Use the service name from docker-compose
+  applicationId: af84a5d9-0d41-4fa8-be44-79c41ae70ff8
+  host: http://vulnerable-app:3000
   env: Development
 
 hawk:
   spider:
     base: true
-  scanner:
-    # This helps speed up the lab by focusing on common web attacks
-    attackTypes:
-      - SQL_INJECTION
-      - CROSS_SITE_SCRIPTING
+  # We removed the 'scanner' section because it was causing the error.
+  # StackHawk will now run its default "Full Scan" policy.

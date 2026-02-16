@@ -25,6 +25,6 @@ jobs:
       - name: Run StackHawk Scan
         uses: stackhawk/hawkscan-action@v2
         with:
-          apiKey: hawk.wiX6XIjLXpmQnmuFM9Y7.ElF9MqimrUfJwv8QPjGB
+          apiKey: ${{ secrets.HAWK_API_KEY }}
         env:
           APP_ID: "af84a5d9-0d41-4fa8-be44-79c41ae70ff8" # Put your App ID here

@@ -21,10 +21,12 @@ jobs:
       - name: Start Vulnerable App
         run: docker compose up -d
 
-      # --- DAST STEP (StackHawk) ---
+# --- DAST STEP (StackHawk) ---
       - name: Run StackHawk Scan
         uses: stackhawk/hawkscan-action@v2
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
+          # This tells the scanner container to join the app's network!
+          args: --network devsecops-lab_lab-net 
         env:
-          APP_ID: "af84a5d9-0d41-4fa8-be44-79c41ae70ff8" # Put your App ID here
+          APP_ID: "af84a5d9-0d41-4fa8-be44-79c41ae70ff8"

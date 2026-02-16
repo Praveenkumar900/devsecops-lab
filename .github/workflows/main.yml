@@ -1,32 +1,15 @@
-name: DevSecOps Lab
-on: [push] # Run every time we push code
-
-jobs:
-  security-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # --- SAST STEP (Trivy) ---
-      - name: Run Trivy Scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'bkimminich/juice-shop:latest' # Scan the image for CVEs
-          format: 'table'
-          exit-code: '0' # We'll set to 0 for the lab so the pipeline doesn't stop
-          severity: 'CRITICAL,HIGH'
-
-      # --- DAST PREP ---
+# --- DAST PREP ---
       - name: Start Vulnerable App
-        run: docker compose up -d
+        run: |
+          docker compose up -d
+          echo "Waiting for Juice Shop to start..."
+          sleep 40 # Give it plenty of time to warm up
 
-# --- DAST STEP (StackHawk) ---
+      # --- DAST STEP (StackHawk) ---
       - name: Run StackHawk Scan
         uses: stackhawk/hawkscan-action@v2
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
-          # This tells the scanner container to join the app's network!
-          args: --network devsecops-lab_lab-net 
+          # No extra args needed now!
         env:
           APP_ID: "af84a5d9-0d41-4fa8-be44-79c41ae70ff8"

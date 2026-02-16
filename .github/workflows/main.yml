@@ -19,7 +19,7 @@ jobs:
 
       # --- DAST PREP ---
       - name: Start Vulnerable App
-        run: docker-compose up -d
+        run: docker compose up -d
 
       # --- DAST STEP (StackHawk) ---
       - name: Run StackHawk Scan

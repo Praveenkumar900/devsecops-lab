@@ -1,6 +1,6 @@
 # stackhawk.yml
 app:
-  applicationId: your-app-id-here  # Replace with the App ID from your dashboard
+  applicationId: af84a5d9-0d41-4fa8-be44-79c41ae70ff8  # Replace with the App ID from your dashboard
   host: http://vulnerable-app:3000 # Use the service name from docker-compose
   env: Development
 

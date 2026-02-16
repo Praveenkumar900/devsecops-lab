@@ -1,0 +1,14 @@
+# stackhawk.yml
+app:
+  applicationId: your-app-id-here  # Replace with the App ID from your dashboard
+  host: http://vulnerable-app:3000 # Use the service name from docker-compose
+  env: Development
+
+hawk:
+  spider:
+    base: true
+  scanner:
+    # This helps speed up the lab by focusing on common web attacks
+    attackTypes:
+      - SQL_INJECTION
+      - CROSS_SITE_SCRIPTING

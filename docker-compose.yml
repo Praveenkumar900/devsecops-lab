@@ -1,10 +1,12 @@
+version: '3.8'
 services:
   vulnerable-app:
     image: bkimminich/juice-shop:latest
     ports:
       - "3000:3000"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    networks:
+      - lab-net  # <--- Define a named network
+
+networks:
+  lab-net:      # <--- Create the bridge network
+    driver: bridge

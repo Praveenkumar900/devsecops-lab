@@ -1,3 +1,22 @@
+name: DevSecOps Lab
+on: [push] # Run every time we push code
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # --- SAST STEP (Trivy) ---
+      - name: Run Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'bkimminich/juice-shop:latest' # Scan the image for CVEs
+          format: 'table'
+          exit-code: '0' # We'll set to 0 for the lab so the pipeline doesn't stop
+          severity: 'CRITICAL,HIGH'
+
 # --- DAST PREP ---
       - name: Start Vulnerable App
         run: |

@@ -3,10 +3,4 @@ services:
   vulnerable-app:
     image: bkimminich/juice-shop:latest
     ports:
-      - "3000:3000"
-    networks:
-      - lab-net  # <--- Define a named network
-
-networks:
-  lab-net:      # <--- Create the bridge network
-    driver: bridge
+      - "3000:3000" # Map container port 3000 to runner port 3000
